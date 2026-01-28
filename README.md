@@ -30,3 +30,4 @@ Para executar o projeto, siga os passos abaixo:
 
    ```bash
    dotnet run
+4. Ou você pode acessar http://krtbank-dev.eba-esmg3erq.sa-east-1.elasticbeanstalk.com/Home/CreateAccount Para começar a utilização de forma direta!
