@@ -1,11 +1,22 @@
+using Amazon;
+using Amazon.DynamoDBv2;
+using Amazon.Runtime;
+using KRT.Application.Interfaces;
+using KRT.Application.Services;
+using KRT.Domain.Entities;
+using KRT.infrastructure;
+using KRT.infrastructure.Repositorys;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<AccountService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");

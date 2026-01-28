@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="4.0.11" />
+    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="4.0.3.21" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KRT.Application\KRT.Application.csproj" />
+  </ItemGroup>
+
 </Project>

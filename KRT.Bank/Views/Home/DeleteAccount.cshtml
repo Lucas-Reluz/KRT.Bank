@@ -1,0 +1,65 @@
+﻿<div class="container d-flex justify-content-center align-items-start" style="min-height: 80vh;">
+	<div class="col-md-8">
+		<h3 class="text-center mb-4">Remover Conta</h3>
+
+		@if (TempData["SuccessMessage"] != null)
+		{
+			<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+				@TempData["SuccessMessage"]
+				<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+			</div>
+		}
+
+		@if (TempData["ErrorMessage"] != null)
+		{
+			<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+				@TempData["ErrorMessage"]
+				<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+			</div>
+		}
+		<form asp-action="Delete" asp-controller="Account" method="post">
+			<div class="form-group mb-3">
+				<label for="document">CPF ou CNPJ</label>
+				<input name="Document" id="document" maxlength="18" class="form-control" required />
+			</div>
+
+			<div class="form-group mb-3">
+				<label for="accountNumber">Número da Conta</label>
+				<input name="AccountNumber" id="accountNumber" maxlength="12" class="form-control" required />
+			</div>
+
+			<button type="submit" class="btn btn-danger w-100">Remover Conta</button>
+		</form>
+	</div>
+	<script>
+		document.getElementById("document").addEventListener("input", function (e) {
+			let value = e.target.value.replace(/\D/g, "");
+
+			if (value.length <= 11) {
+				value = value.replace(/(\d{3})(\d)/, "$1.$2");
+				value = value.replace(/(\d{3})(\d)/, "$1.$2");
+				value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+			} else {
+				value = value.replace(/^(\d{2})(\d)/, "$1.$2");
+				value = value.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+				value = value.replace(/\.(\d{3})(\d)/, ".$1/$2");
+				value = value.replace(/(\d{4})(\d{1,2})$/, "$1-$2");
+			}
+
+			e.target.value = value;
+		});
+	</script>
+
+	<script>
+		document.getElementById("accountNumber").addEventListener("input", function (e) {
+			let value = e.target.value.replace(/\D/g, "");
+
+			if (value.length > 1) {
+				value = value.slice(0, -1) + "-" + value.slice(-1);
+			}
+
+			e.target.value = value;
+		});
+	</script>
+</div>
+

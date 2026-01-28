@@ -1,6 +1,8 @@
-using System.Diagnostics;
+using KRT.Application.DTOs;
 using KRT.Bank.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace KRT.Bank.Controllers
 {
@@ -14,6 +16,37 @@ namespace KRT.Bank.Controllers
         }
 
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult CreateAccount()
+        {
+            return View();
+        }
+
+        public IActionResult GetAccount()
+        {
+            if (TempData["Account"] != null)
+            {
+                var account = JsonConvert.DeserializeObject<AccountDto>((string)TempData["Account"]);
+                ViewBag.Account = account;
+                TempData.Remove("Account");
+            }
+            return View();
+        }
+
+        public IActionResult UpdateAccount()
+        {
+            return View();
+        }
+
+        public IActionResult DeleteAccount()
+        {
+            return View();
+        }
+
+        public IActionResult TransferPix()
         {
             return View();
         }

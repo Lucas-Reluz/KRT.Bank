@@ -1,0 +1,96 @@
+﻿@model TransferViewModel
+
+<div class="container mt-5">
+	<h3 class="text-center mb-4">Transferência PIX</h3>
+
+	@if (TempData["SuccessMessage"] != null)
+	{
+		<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+			@TempData["SuccessMessage"]
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+		</div>
+	}
+
+	@if (TempData["ErrorMessage"] != null)
+	{
+		<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+			@TempData["ErrorMessage"]
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+		</div>
+	}
+
+	<form asp-action="Transfer" asp-controller="Account" method="post">
+		<div class="mb-4">
+			<label for="FromDocument">Documento da Conta Remetente</label>
+			<input type="text" id="FromDocument" name="FromDocument" class="form-control" required />
+		</div>
+		<div class="mb-4">
+			<label for="FromAccountNumber">Número da Conta Remetente</label>
+			<input type="text" id="FromAccountNumber" name="FromAccountNumber" class="form-control" required />
+		</div>
+		<div class="mb-4">
+			<label for="ToDocument">Documento da Conta Destinatária</label>
+			<input type="text" id="ToDocument" name="ToDocument" class="form-control" required />
+		</div>
+		<div class="mb-4">
+			<label for="ToAccountNumber">Número da Conta Destinatária</label>
+			<input type="text" id="ToAccountNumber" name="ToAccountNumber" class="form-control" required />
+		</div>
+
+		<div class="mb-4">
+			<label for="Amount">Valor a ser transferido</label>
+			<input type="number" id="Amount" name="Amount" class="form-control" step="0.01" required />
+		</div>
+
+		<button type="submit" class="btn btn-success w-100">Confirmar Transferência</button>
+	</form>
+
+	<script>
+		function formatDocument(input) {
+			let value = input.value.replace(/\D/g, "");
+
+			if (value.length <= 11) {
+				value = value.replace(/(\d{3})(\d)/, "$1.$2");
+				value = value.replace(/(\d{3})(\d)/, "$1.$2");
+				value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+			} else {
+				value = value.replace(/^(\d{2})(\d)/, "$1.$2");
+				value = value.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+				value = value.replace(/\.(\d{3})(\d)/, ".$1/$2");
+				value = value.replace(/(\d{4})(\d{1,2})$/, "$1-$2");
+			}
+
+			input.value = value;
+		}
+
+		document.getElementById("FromDocument").addEventListener("input", function (e) {
+			formatDocument(e.target);
+		});
+
+		document.getElementById("ToDocument").addEventListener("input", function (e) {
+			formatDocument(e.target);
+		});
+	</script>
+
+
+	<script>
+		function formatAccountNumber(input) {
+			let value = input.value.replace(/\D/g, "");
+
+			if (value.length > 1) {
+				value = value.slice(0, value.length - 1) + "-" + value.slice(-1);
+			}
+
+			input.value = value;
+		}
+
+		document.getElementById("FromAccountNumber").addEventListener("input", function (e) {
+			formatAccountNumber(e.target);
+		});
+
+		document.getElementById("ToAccountNumber").addEventListener("input", function (e) {
+			formatAccountNumber(e.target);
+		});
+	</script>
+
+</div>

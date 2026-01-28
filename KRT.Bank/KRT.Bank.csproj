@@ -6,4 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KRT.Application\KRT.Application.csproj" />
+    <ProjectReference Include="..\KRT.infrastructure\KRT.infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
