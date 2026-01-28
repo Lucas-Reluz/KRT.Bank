@@ -1,2 +1,2 @@
-# KRT.Bank
-Banco KRT novo sistema para gestão de limite de contas
+# KRT.BANK
+Novo sistema para gestão de limite de suas contas
