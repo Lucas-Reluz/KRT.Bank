@@ -24,17 +24,17 @@
 		<form method="post" asp-controller="Account" asp-action="Create">
 			<div class="form-group mb-3">
 				<label for="document">CPF ou CNPJ</label>
-				<input type="text" id="document" name="Document" class="form-control" required />
+				<input type="text" id="document" name="Document" maxlength="18" class="form-control" required />
 			</div>
 
 			<div class="form-group mb-3">
 				<label for="agency">Agência</label>
-				<input type="text" id="agency" name="AgencyNumber" class="form-control" required />
+				<input type="text" id="agency" name="AgencyNumber" maxlength="4" pattern="^\d{4,5}$" class="form-control" required />
 			</div>
 
 			<div class="form-group mb-3">
 				<label for="account">Conta</label>
-				<input type="text" id="account" name="AccountNumber" class="form-control" required />
+				<input type="text" id="accountNumber" name="AccountNumber" maxlength="14" class="form-control" pattern="^\d{1,10}$" required />
 			</div>
 
 			<div class="form-group mb-3">
