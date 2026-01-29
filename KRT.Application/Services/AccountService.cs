@@ -23,7 +23,7 @@ namespace KRT.Application.Services
         {
             var documentObj = new Document(dto.Document);
 
-            var account = new Account(documentObj, dto.AgencyNumber, dto.AccountNumber, dto.PixLimit);
+            var account = new Account(documentObj, dto.AccountNumber, dto.AgencyNumber, dto.PixLimit);
 
             await _accountRepository.SaveAsync(account);
         }
